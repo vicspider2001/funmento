@@ -1,0 +1,33 @@
+{
+  "name": "zarvichhotel",
+  "version": "1.0.0",
+  "description": "HotelNode",
+  "main": "index.js",
+  "scripts": {
+    "start": "node zarvichHotel.js --watch",
+    "dev": "pm2 start zarvichHotel.js",
+    "stop": "pm2 stop zarvichHotel.js",
+    "funmi": "nodemon zarvichHotel.js"
+  },
+  "keywords": [
+    "Hotel",
+    "Api"
+  ],
+  "author": "Ikem and Zara",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.1",
+    "chalk": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.3.0",
+    "mongoose": "^6.1.6",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "pm2": "^5.3.0"
+  }
+}
