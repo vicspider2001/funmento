@@ -149,6 +149,27 @@ zarvich.post('/newCustomer',(req,res)=>{
 	})
 })
 
+//get customers
+zarvich.get('/getCustomers', (req,res)=> {
+    var query = {};
+    console.log(req.query.id)
+    if(req.query.id){
+        query={roomtype_id:Number(req.query.id)}
+    }
+
+// //return meal order wrt orderNum
+//     else if (req.query.orderNum){
+//         var orderNum=(req.query.orderNum)
+//         query={'orderID':(orderNum)}
+//     }
+
+   db.collection('customersAccount').find(query).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
+
 //get meal order
 zarvich.get('/getOrders', (req,res)=> {
     var query = {};
