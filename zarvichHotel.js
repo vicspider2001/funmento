@@ -74,6 +74,20 @@ zarvich.get('/menu', (req,res)=> {
     })
 })
 
+//return all meal quantity
+zarvich.get('/qty', (req,res)=> {
+    var query = {};
+    console.log(req.query.id)
+    if(req.query.id){
+        query={roomtype_id:Number(req.query.id)}
+    }
+
+    db.collection('mealQty').find(query).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
 //Edit Price
 zarvich.put('/editprice/:id',(req,res)=>{
     console.log(req.params.id);
