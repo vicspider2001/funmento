@@ -43,6 +43,11 @@ zarvich.get('/meals', (req,res)=> {
         query={menuCategory:(mealID)}
     }
 
+    else if(req.query.menuID){
+        var menuID = (req.query.menuID)
+        query={_id:(menuID)}
+    }
+
     db.collection('meals').find(query).toArray((err,result) => {
         if(err) throw err;
         res.send(result)
