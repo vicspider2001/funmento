@@ -152,6 +152,15 @@ zarvich.post('/addCategory',(req,res)=>{
 	})
 })
 
+// Post to Cart
+zarvich.post('/addtocart',(req,res)=>{
+	console.log(req.body);
+	db.collection('Cart').insertOne(req.body,(err,result)=>{
+		if(err) throw err;
+		res.send("Cart Updated")
+	})
+})
+
 // Post a new HomeCarousel
 zarvich.post('/addCarousel',(req,res)=>{
 	console.log(req.body);
