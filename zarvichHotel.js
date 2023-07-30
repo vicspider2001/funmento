@@ -155,10 +155,31 @@ zarvich.post('/addCategory',(req,res)=>{
 // Post to Cart
 zarvich.post('/addtocart',(req,res)=>{
 	console.log(req.body);
-	db.collection('Cart').insertOne(req.body,(err,result)=>{
+
+    db.collection('Cart').insertOne(req.body,(err,result)=>{
 		if(err) throw err;
 		res.send("Cart Updated")
 	})
+})
+
+//return all meal Categories
+zarvich.get('/cart', (req,res)=> {
+    var query = {};
+    console.log(req.query.id)
+    if(req.query.id){
+        query={roomtype_id:Number(req.query.id)}
+    }
+
+//return menu wrt Cart
+    else if(req.query.cartUserID){
+        var cartUserID = (req.query.cartUserID)
+        query={userID:(cartUserID)}
+    }
+
+    db.collection('Cart').find(query).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
 })
 
 // Post a new HomeCarousel
