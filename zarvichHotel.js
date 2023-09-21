@@ -206,6 +206,17 @@ zarvich.post('/newCustomer',(req,res)=>{
 	})
 })
 
+// Post to cart
+zarvich.post('/addtocart',(req,res)=>{
+	console.log(req.body);
+	db.collection('Cart').insertOne(req.body,(err,result)=>{
+		if(err) throw err;
+		res.send("Complete")
+	})
+})
+
+
+
 //get customers
 zarvich.get('/getCustomers', (req,res)=> {
     var query = {};
@@ -242,6 +253,27 @@ zarvich.get('/getOrders', (req,res)=> {
     }
 
    db.collection('mealOrders').find(query).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
+
+//get cart items
+zarvich.get('/cart', (req,res)=> {
+    var query = {};
+    console.log(req.query.id)
+    if(req.query.id){
+        query={roomtype_id:Number(req.query.id)}
+    }
+
+//return cart order wrt userID
+    else if (req.query.cartUserID){
+        var cartUserID=(req.query.cartUserID)
+        query={'userID':(cartUserID)}
+    }
+
+   db.collection('Cart').find(query).toArray((err,result) => {
         if(err) throw err;
         res.send(result)
     })
