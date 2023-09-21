@@ -103,6 +103,21 @@ zarvich.get('/riceqty', (req,res)=> {
 })
 
 
+//return all Soup meal quantity
+zarvich.get('/soupqty', (req,res)=> {
+    var query = {};
+    console.log(req.query.id)
+    if(req.query.id){
+        query={roomtype_id:Number(req.query.id)}
+    }
+
+    db.collection('soupQty').find(query).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
+
 //Edit Price
 zarvich.put('/editprice/:id',(req,res)=>{
     console.log(req.params.id);
@@ -152,6 +167,8 @@ zarvich.post('/addMeal',(req,res)=>{
 		res.send("Check in Complete")
 	})
 })
+
+
 
 // Post a new mealCategory
 zarvich.post('/addCategory',(req,res)=>{
