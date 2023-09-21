@@ -43,11 +43,6 @@ zarvich.get('/meals', (req,res)=> {
         query={menuCategory:(mealID)}
     }
 
-    else if(req.query.menuID){
-        var menuID = (req.query.menuID)
-        query={_id:(menuID)}
-    }
-
     db.collection('meals').find(query).toArray((err,result) => {
         if(err) throw err;
         res.send(result)
@@ -92,6 +87,21 @@ zarvich.get('/qty', (req,res)=> {
         res.send(result)
     })
 })
+
+//return all Rice meal quantity
+zarvich.get('/riceqty', (req,res)=> {
+    var query = {};
+    console.log(req.query.id)
+    if(req.query.id){
+        query={roomtype_id:Number(req.query.id)}
+    }
+
+    db.collection('riceMealQty').find(query).toArray((err,result) => {
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
 
 //Edit Price
 zarvich.put('/editprice/:id',(req,res)=>{
@@ -150,36 +160,6 @@ zarvich.post('/addCategory',(req,res)=>{
 		if(err) throw err;
 		res.send("Check in Complete")
 	})
-})
-
-// Post to Cart
-zarvich.post('/addtocart',(req,res)=>{
-	console.log(req.body);
-
-    db.collection('Cart').insertOne(req.body,(err,result)=>{
-		if(err) throw err;
-		res.send("Cart Updated")
-	})
-})
-
-//return all meal Categories
-zarvich.get('/cart', (req,res)=> {
-    var query = {};
-    console.log(req.query.id)
-    if(req.query.id){
-        query={roomtype_id:Number(req.query.id)}
-    }
-
-//return menu wrt Cart
-    else if(req.query.cartUserID){
-        var cartUserID = (req.query.cartUserID)
-        query={userID:(cartUserID)}
-    }
-
-    db.collection('Cart').find(query).toArray((err,result) => {
-        if(err) throw err;
-        res.send(result)
-    })
 })
 
 // Post a new HomeCarousel
